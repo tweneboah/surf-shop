@@ -44,10 +44,11 @@ router.get('/:id', (req, res, next) => {
     if(err){
       console.log(err)
     }else {
-      res.send(foundPost)
+       res.render('posts/show', {post: foundPost});
+      
     }
   })
-  //res.send('SHOW /posts/:id');
+  
 });
 
 
@@ -57,12 +58,26 @@ router.get('/:id', (req, res, next) => {
 
 //1. Get the form for editting
 router.get('/:id/edit', (req, res, next) => {
-  res.send('EDIT /posts/:id/edit');
+     Post.findById(req.params.id, (err, foundPost) => {
+         if(err){
+           console.log(err)
+         }else {
+          res.render('posts/edit', {post: foundPost} )
+         }
+     })
 });
 
 //2. Editting Logic
 router.put('/:id', (req, res, next) => {
-  res.send('UPDATE /posts/:id');
+  //req.body.post contains all the post we passed to our edit template
+  Post.findByIdAndUpdate(req.params.id, req.body.post, {new: true}, (err, updatedPost) => {
+  
+    if(err){
+      console.log(err)
+    }else{
+      res.redirect(`/posts/${updatedPost.id}`)
+    }
+  })
 });
 
 //===============
