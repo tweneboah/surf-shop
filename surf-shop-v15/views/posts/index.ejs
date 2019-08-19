@@ -1,0 +1,13 @@
+<h1>POSTS</h1>
+
+
+<div>
+
+ <%posts.forEach((post) => {%>
+    <div>
+     <h2>title:<%= post.title%></h2> 
+   <div>Description: <%-post.description%></div> 
+    <div>Location:<%= post.location%></div> 
+    <a href='/posts/ + <%=post.id%>'>Read more</a>
+    </div>
+ <%})%>

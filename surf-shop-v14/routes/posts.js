@@ -39,8 +39,16 @@ router.post('/', (req, res, next) => {
 //===============
 // SHOW MORE
 //=====================
-router.get('/:id/new', (req, res, next) => {
-  res.render('/posts/new');
+router.get('/:id', (req, res, next) => {
+  Post.findById(req.params.id, (err, foundPost) => {
+    if(err){
+      console.log(err)
+    }else {
+       res.render('posts/show', {post: foundPost});
+      
+    }
+  })
+  
 });
 
 
