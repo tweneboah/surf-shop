@@ -1,12 +1,14 @@
 const User = require('../models/user');
+const express = require('express');
+const router = express.Router()
 
 
 module.exports = {
   
  postRegister(req, res, next) {
-   router.post('/register', (req, res, next) => {
+   
        console.log('registering user');
-       User.register(new Account({username: req.body.username}), req.body.password, (err) => {
+       User.register(new User({username: req.body.username}), req.body.password, (err) => {
          if (err) {
            console.log('error while user register!', err);
            return next(err);
@@ -16,7 +18,7 @@ module.exports = {
      
          res.redirect('/');
        });
-     });
+     
   }
 
 }
