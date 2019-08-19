@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const mongoose = require('mongoose');
 //passport
 const passport = require('passport');
 const passportLocal = require('passport-local');
@@ -12,14 +13,19 @@ const passportLocal = require('passport-local');
 const User = require('./models/user')
 // routes
 const indexRouter = require('./routes/index');
-const postRouter = require('./routes/posts')
+const postRouter = require('./routes/posts');
+
+
+//DB CONNECTION
+mongoose.connect('mongodb://localhost/Surf-Shop', {
+ useNewUrlParser: true,
+ useCreateIndex: true,
+ useFindAndModify: false
+})
+.then(() => console.log("DB Connected successfully"));
+
 
 const app = express();
-
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
